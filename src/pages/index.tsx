@@ -51,8 +51,8 @@ export default function Home() {
         <Contact />
       </section>
 
-      <Link href="#hero">
-        <footer className="sticky bottom-5 w-full cursor-pointer">
+      <footer className="sticky bottom-5 w-full cursor-pointer">
+        <Link href="#hero">
           <div className="flex items-center justify-center">
             <img
               className="h-10 w-10 rounded-full filter grayscale hover:grayscale-0 cursor-pointer"
@@ -60,8 +60,8 @@ export default function Home() {
               alt="footer-img"
             />
           </div>
-        </footer>
-      </Link>
+        </Link>
+      </footer>
 
       {/* change text for own */}
       {/* change img for next.image */}
