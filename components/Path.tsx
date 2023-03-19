@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import PathCard from "./PathCard";
+import { VerticalTimeline } from "react-vertical-timeline-component";
 
 type Props = {};
 
@@ -22,9 +23,9 @@ const Path = (props: Props) => {
       </h4>
 
       <div className="mt-20 flex flex-col">
-        <VerticalTimeLine>
+        <VerticalTimeline>
           <PathCard />
-        </VerticalTimeLine>
+        </VerticalTimeline>
       </div>
     </motion.div>
   );

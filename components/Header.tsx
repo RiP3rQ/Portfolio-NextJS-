@@ -2,10 +2,14 @@ import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Socials } from "../typings";
+import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
-type Props = {};
+type Props = {
+  socials: Socials[];
+};
 
-const Header = (props: Props) => {
+const Header = ({ socials }: Props) => {
   return (
     <header
       className="sticky top-0 p-5 flex items-start justify-between 
@@ -28,16 +32,15 @@ const Header = (props: Props) => {
         className="flex flex-row items-center"
       >
         {/* SOCIAL ICONS | LEFT*/}
-        <SocialIcon
-          url="https://github.com/rip3rq"
-          fgColor="gray"
-          bgColor="transparent"
-        />
-        <SocialIcon
-          url="https://www.linkedin.com/in/rafa%C5%82pompa2000/"
-          fgColor="gray"
-          bgColor="transparent"
-        />
+        {socials?.map((social) => (
+          <SocialIcon
+            key={social._id}
+            url={social.url}
+            fgColor="gray"
+            bgColor="transparent"
+            target="_blank"
+          />
+        ))}
       </motion.div>
 
       {/* RIGTH */}
@@ -45,7 +48,7 @@ const Header = (props: Props) => {
         <motion.div
           initial={{
             opacity: 0,
-            x: 500,
+            x: 200,
             scale: 0.5,
           }}
           animate={{
@@ -56,13 +59,11 @@ const Header = (props: Props) => {
           transition={{
             duration: 1.5,
           }}
-          className="flex flex-row items-center text-gray-300 cursor-pointer"
+          className="flex items-center text-gray-300 cursor-pointer justify-center space-x-2"
         >
-          <SocialIcon
-            className="cursor-pointer"
-            network="email"
-            fgColor="gray"
-            bgColor="transparent"
+          <EnvelopeIcon
+            className="cursor-pointer bg-transparent text-gray-500 
+          h-6 w-6"
           />
           <p className="uppercase hidden md:inline-flex text-sm text-gray-400">
             Get in touch

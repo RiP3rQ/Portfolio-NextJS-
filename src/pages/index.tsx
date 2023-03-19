@@ -1,5 +1,5 @@
+import { GetStaticProps } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import About from "../../components/About";
 import AllProjects from "../../components/AllProjects";
@@ -9,8 +9,18 @@ import Hero from "../../components/Hero";
 import Path from "../../components/Path";
 import Projects from "../../components/Projects";
 import Skills from "../../components/Skills";
+import { PageInfo, Skills as Skill, Socials } from "../../typings";
+import { fetchPageInfo } from "../../utils/fetchPageInfo";
+import { fetchSkills } from "../../utils/fetchSkills";
+import { fetchSocials } from "../../utils/fetchSocials";
 
-export default function Home() {
+type Props = {
+  pageInfo: PageInfo[];
+  skills: Skill[];
+  socials: Socials[];
+};
+
+export default function Home({ pageInfo, socials, skills }: Props) {
   return (
     <div
       className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-scroll 
@@ -22,14 +32,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       {/* HEADER */}
-      <Header />
+      <Header socials={socials} />
       {/* HERO */}
       <section id="hero" className="snap-start">
-        <Hero />
+        <Hero pageInfo={pageInfo} />
       </section>
       {/* ABOUT */}
       <section id="about" className="snap-center">
-        <About />
+        <About pageInfo={pageInfo} />
       </section>
       {/* PATH */}
       <section id="path" className="snap-center">
@@ -37,7 +47,7 @@ export default function Home() {
       </section>
       {/* SKILLS */}
       <section id="skills" className="snap-center">
-        <Skills />
+        <Skills skills={skills} />
       </section>
       {/* ALL PROJECTS */}
       <section id="projects" className="snap-center">
@@ -51,8 +61,8 @@ export default function Home() {
         <Contact />
       </section>
 
-      <footer className="sticky bottom-5 w-full cursor-pointer">
-        <Link href="#hero">
+      <Link href="#hero">
+        <footer className="sticky bottom-5 w-full cursor-pointer">
           <div className="flex items-center justify-center">
             <img
               className="h-10 w-10 rounded-full filter grayscale hover:grayscale-0 cursor-pointer"
@@ -60,12 +70,36 @@ export default function Home() {
               alt="footer-img"
             />
           </div>
-        </Link>
-      </footer>
-
-      {/* change text for own */}
-      {/* change img for next.image */}
-      {/* form validation https://www.youtube.com/watch?v=7j6xWy4P_LA */}
+        </footer>
+      </Link>
     </div>
   );
 }
+
+{
+  /* change text for own */
+}
+{
+  /* change img for next.image */
+}
+{
+  /* form validation https://www.youtube.com/watch?v=7j6xWy4P_LA */
+}
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const pageInfo: PageInfo[] = await fetchPageInfo();
+  const skills: Skill[] = await fetchSkills();
+  const socials: Socials[] = await fetchSocials();
+
+  return {
+    props: {
+      pageInfo,
+      skills,
+      socials,
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 60 second
+    revalidate: 60,
+  };
+};

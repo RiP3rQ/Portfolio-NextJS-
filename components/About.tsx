@@ -1,9 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { PageInfo } from "../typings";
+import { urlFor } from "../sanity";
 
-type Props = {};
+type Props = {
+  pageInfo: PageInfo;
+};
 
-const About = (props: Props) => {
+const About = ({ pageInfo }: Props) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -21,7 +25,7 @@ const About = (props: Props) => {
         whileInView={{ x: 0, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1.5 }}
-        src="https://cdn-icons-png.flaticon.com/512/3048/3048127.png"
+        src={urlFor(pageInfo?.profilePic).url()}
         className="-mb-20 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full object-cover 
         md:rounded-lg md:w-64 md:h-96"
       />
@@ -32,12 +36,7 @@ const About = (props: Props) => {
           <span className="underline decoration-[#F7AB0A]/50">little</span>{" "}
           background
         </h4>
-        <p className="text-base">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni
-          suscipit repellat repudiandae id delectus quo, sit at odit voluptatem
-          molestiae necessitatibus architecto nobis eum similique adipisci
-          numquam sed, dolores consequatur?
-        </p>
+        <p className="text-base">{pageInfo?.backgroundInfo}</p>
       </div>
     </motion.div>
   );

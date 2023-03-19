@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { groq } from "next-sanity";
 import { PageInfo } from "../../../typings";
-import { SanityClient } from "../../sanity";
+import { SanityClient } from "../../../sanity";
 
 type Data = {
   pageInfo: PageInfo[];

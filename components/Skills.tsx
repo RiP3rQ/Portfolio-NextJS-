@@ -1,10 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import SkillItem from "./SkillItem";
+import { Skills } from "../typings";
 
-type Props = {};
+type Props = {
+  skills: Skills[];
+};
 
-const Skills = (props: Props) => {
+const Skills = ({ skills }: Props) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -17,20 +20,23 @@ const Skills = (props: Props) => {
         Skills
       </h3>
 
-      <h3 className="absolute top-36 uppercase tracking-[3px] text-gray-500 text-sm">
+      <h4 className="absolute top-36 uppercase tracking-[3px] text-gray-500 text-sm">
         SKills that i learned throughout my journey as a developer
-      </h3>
+      </h4>
+
+      <h5 className="absolute top-40 uppercase tracking-[3px] text-gray-500 text-[10px]">
+        ( Hover over a skill for current proficiency vs other juniors )
+      </h5>
 
       {/* Render Skills Learned */}
-      <div className="grid grid-cols-4 gap-5">
-        <SkillItem />
-        <SkillItem />
-        <SkillItem />
-        <SkillItem />
-        <SkillItem />
-        <SkillItem />
-        <SkillItem />
-        <SkillItem />
+      <div className="grid grid-cols-4 gap-5 mt-10">
+        {skills?.slice(0, skills.length / 2).map((skill) => (
+          <SkillItem key={skill._id} skill={skill} directionLeft />
+        ))}
+
+        {skills?.slice(skills.length / 2, skills.length).map((skill) => (
+          <SkillItem key={skill._id} skill={skill} />
+        ))}
       </div>
     </motion.div>
   );

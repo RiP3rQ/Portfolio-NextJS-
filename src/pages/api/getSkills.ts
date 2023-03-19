@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { groq } from "next-sanity";
 import { Skills } from "../../../typings";
-import { SanityClient } from "../../sanity";
+import { SanityClient } from "../../../sanity";
 
 type Data = {
   skills: Skills[];
