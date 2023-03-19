@@ -1,8 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
 import About from "../../components/About";
+import AllProjects from "../../components/AllProjects";
+import Contact from "../../components/Contact";
 import Header from "../../components/Header";
 import Hero from "../../components/Hero";
+import Path from "../../components/Path";
+import Projects from "../../components/Projects";
+import Skills from "../../components/Skills";
 
 export default function Home() {
   return (
@@ -12,10 +17,8 @@ export default function Home() {
         <meta name="description" content="Portfolio uzytkownika RiP3rQ" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-
       {/* HEADER */}
       <Header />
-
       {/* HERO */}
       <section id="hero" className="snap-start">
         <Hero />
@@ -25,9 +28,24 @@ export default function Home() {
         <About />
       </section>
       {/* PATH */}
+      <section id="path" className="snap-center">
+        <Path />
+      </section>
       {/* SKILLS */}
-      {/* PROJECTS */}
+      <section id="skills" className="snap-center">
+        <Skills />
+      </section>
+      {/* ALL PROJECTS */}
+      <section id="projects" className="snap-center">
+        <Projects />
+      </section>
+      <section id="all_projects" className="snap-center">
+        <AllProjects />
+      </section>
       {/* CONTACT ME */}
+      <section id="contact" className="snap-center">
+        <Contact />
+      </section>
     </div>
   );
 }
