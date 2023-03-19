@@ -11,7 +11,7 @@ import Skills from "../../components/Skills";
 
 export default function Home() {
   return (
-    <div className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-scroll z-0">
+    <div className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-scroll z-0 overflow-x-hidden">
       <Head>
         <title>RiP3rQ Portfolio</title>
         <meta name="description" content="Portfolio uzytkownika RiP3rQ" />
@@ -46,6 +46,9 @@ export default function Home() {
       <section id="contact" className="snap-center">
         <Contact />
       </section>
+
+      {/* change text for own */}
+      {/* change img for next.image */}
     </div>
   );
 }
