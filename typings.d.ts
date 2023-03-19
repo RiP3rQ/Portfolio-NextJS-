@@ -64,4 +64,12 @@ export interface Projects extends SanityBody {
   technologies: Technologies[];
 }
 
-// path
+export interface Paths extends SanityBody {
+  _type: "path";
+  name: string;
+  image: Image;
+  description: string;
+  technologies: Technologies[];
+  startingDate: date;
+  endingDate: date;
+}

@@ -9,18 +9,20 @@ import Hero from "../../components/Hero";
 import Path from "../../components/Path";
 import Projects from "../../components/Projects";
 import Skills from "../../components/Skills";
-import { PageInfo, Skills as Skill, Socials } from "../../typings";
+import { PageInfo, Paths, Skills as Skill, Socials } from "../../typings";
 import { fetchPageInfo } from "../../utils/fetchPageInfo";
+import { fetchPaths } from "../../utils/fetchPaths";
 import { fetchSkills } from "../../utils/fetchSkills";
 import { fetchSocials } from "../../utils/fetchSocials";
 
 type Props = {
-  pageInfo: PageInfo[];
+  pageInfo: PageInfo;
   skills: Skill[];
   socials: Socials[];
+  paths: Paths[];
 };
 
-export default function Home({ pageInfo, socials, skills }: Props) {
+export default function Home({ pageInfo, socials, skills, paths }: Props) {
   return (
     <div
       className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-scroll 
@@ -43,7 +45,7 @@ export default function Home({ pageInfo, socials, skills }: Props) {
       </section>
       {/* PATH */}
       <section id="path" className="snap-center">
-        <Path />
+        <Path paths={paths} />
       </section>
       {/* SKILLS */}
       <section id="skills" className="snap-center">
@@ -90,12 +92,14 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   const pageInfo: PageInfo[] = await fetchPageInfo();
   const skills: Skill[] = await fetchSkills();
   const socials: Socials[] = await fetchSocials();
+  const paths: Paths[] = await fetchPaths();
 
   return {
     props: {
       pageInfo,
       skills,
       socials,
+      paths,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
