@@ -13,8 +13,14 @@ type Inputs = {
 };
 
 const Contact = (props: Props) => {
-  const { register, handleSubmit } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (formData) => console.log(formData);
+  const { register, handleSubmit, reset } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (formData) => {
+    fetch("/api/mail", {
+      method: "POST",
+      body: JSON.stringify(formData),
+    });
+    reset();
+  };
 
   return (
     <motion.div
@@ -54,13 +60,13 @@ const Contact = (props: Props) => {
               {...register("name")}
               type="text"
               className="contactInput"
-              placeholder="Name"
+              placeholder="Name*"
             />
             <input
               {...register("email")}
               type="email"
               className="contactInput"
-              placeholder="Email"
+              placeholder="Email*"
             />
           </div>
 
@@ -68,13 +74,13 @@ const Contact = (props: Props) => {
             {...register("title")}
             type="text"
             className="contactInput"
-            placeholder="Title"
+            placeholder="Title*"
           />
 
           <textarea
             {...register("message")}
             className="contactInput"
-            placeholder="Message"
+            placeholder="Message*"
           />
 
           <button

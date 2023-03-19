@@ -49,6 +49,7 @@ export default function Home() {
 
       {/* change text for own */}
       {/* change img for next.image */}
+      {/* form validation https://www.youtube.com/watch?v=7j6xWy4P_LA */}
     </div>
   );
 }
