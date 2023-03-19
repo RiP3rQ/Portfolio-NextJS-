@@ -1,10 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 import Header from "../../components/Header";
+import Hero from "../../components/Hero";
 
 export default function Home() {
   return (
-    <>
+    <div className="bg-[rgb(36,36,36)] text-white h-screen">
       <Head>
         <title>RiP3rQ Portfolio</title>
         <meta name="description" content="Portfolio uzytkownika RiP3rQ" />
@@ -13,12 +14,16 @@ export default function Home() {
 
       {/* HEADER */}
       <Header />
+
       {/* HERO */}
+      <section id="hero">
+        <Hero />
+      </section>
       {/* ABOUT */}
       {/* PATH */}
       {/* SKILLS */}
       {/* PROJECTS */}
       {/* CONTACT ME */}
-    </>
+    </div>
   );
 }
