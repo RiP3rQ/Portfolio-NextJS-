@@ -7,7 +7,7 @@ type Props = {};
 const Hero = (props: Props) => {
   const [text, count] = useTypewriter({
     words: [
-      "Hi, The Name's Rafał Pompa",
+      "Hi, My Name's Rafał Pompa",
       "I aspire to be a full stack developer",
       "Guy-who-loves-to-workout.tsx",
     ],
@@ -16,7 +16,7 @@ const Hero = (props: Props) => {
   });
 
   return (
-    <div>
+    <div className="h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden">
       <BackgroundCircles />
       <h1>
         <span>{text}</span>
