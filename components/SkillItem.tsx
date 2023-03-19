@@ -11,7 +11,7 @@ const SkillItem = ({ directionLeft }: Props) => {
       <motion.img
         initial={{ x: directionLeft ? -200 : 200, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
-        transition={{ duration: 1.5 }}
+        transition={{ duration: 1 }}
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/800px-HTML5_logo_and_wordmark.svg.png"
         alt="skill_item"
         className="rounded-full border border-gray-500 object-cover w-24 h-24 md:h-28 md:w-28 xl:w-32 xl:h-32 
