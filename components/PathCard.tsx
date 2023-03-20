@@ -2,10 +2,10 @@ import React from "react";
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { urlFor } from "../sanity";
-import { Path } from "../typings";
+import { Paths } from "../typings";
 
 type Props = {
-  path: Path;
+  path: Paths;
 };
 
 const PathCard = ({ path }: Props) => {
@@ -36,8 +36,9 @@ const PathCard = ({ path }: Props) => {
           {path?.description}
         </p>
         <div className="flex flex-row space-x-1">
-          {path?.technologies?.map((tech: Path) => (
+          {path?.technologies?.map((tech) => (
             <img
+              key={tech._id}
               src={urlFor(tech.image).url()}
               alt="tech_img"
               className="h-8 w-8 object-contain rounded-full"

@@ -1,8 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
-import MainProjectCard from "./MainProjectCard";
+import ProjectCard from "./ProjectCard";
 
 type Props = {};
+
+const categories = [
+  "Mobile Apps",
+  "React Apps",
+  "MERN Apps",
+  "Blockchain Dapps",
+  "UI/UX",
+];
 
 const Projects = (props: Props) => {
   return (
@@ -10,22 +18,34 @@ const Projects = (props: Props) => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="h-screen flex relative overflow-hidden flex-col text-left md:flex-row max-w-full px-10 
-    justify-evenly mx-auto items-center"
+      className="min-h-screen flex relative flex-col text-center md:text-left md:flex-row max-w-[2000px] xl:px-10 
+    justify-center mx-auto items-center xl:space-y-0"
     >
-      <h3 className="absolute top-24 uppercase tracking-[20px] text-gray-500 text-2xl">
-        Main Projects
+      <h3 className="absolute top-12 uppercase tracking-[20px] text-gray-500 text-2xl">
+        Projects
       </h3>
-      {/* Main Project Card x5*/}
+
+      <h4 className="absolute top-20 uppercase tracking-[3px] text-gray-500 text-sm border-b border-gray-500 pb-1">
+        Few of my projects, that i've done so far
+      </h4>
+
+      <div className="absolute top-32 flex flex-row items-center justify-center space-x-8">
+        {categories.map((category, index) => (
+          <button className="heroButton" key={index}>
+            {category}
+          </button>
+        ))}
+      </div>
+      {/* Project Cards */}
       <div
         className="w-full flex space-x-5 overflow-x-scroll p-10 snap-x 
       snap-mandatory scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80"
       >
-        <MainProjectCard />
-        <MainProjectCard />
-        <MainProjectCard />
-        <MainProjectCard />
-        <MainProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
       </div>
     </motion.div>
   );

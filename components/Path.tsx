@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import PathCard from "./PathCard";
 import { VerticalTimeline } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import { Path } from "../typings";
+import { Paths } from "../typings";
 
 type Props = {
-  paths: Path[];
+  paths: Paths[];
 };
 
 const Path = ({ paths }: Props) => {

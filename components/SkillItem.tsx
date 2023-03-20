@@ -14,7 +14,7 @@ const SkillItem = ({ directionLeft, skill }: Props) => {
       <motion.img
         initial={{ x: directionLeft ? -200 : 200, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.3 }}
         src={urlFor(skill?.image).url()}
         alt="skill_item"
         className="rounded-full border border-gray-500 object-contain w-20 h-20 md:h-24 md:w-24 

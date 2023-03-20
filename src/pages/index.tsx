@@ -2,7 +2,6 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import About from "../../components/About";
-import AllProjects from "../../components/AllProjects";
 import Contact from "../../components/Contact";
 import Header from "../../components/Header";
 import Hero from "../../components/Hero";
@@ -55,9 +54,6 @@ export default function Home({ pageInfo, socials, skills, paths }: Props) {
       <section id="projects" className="snap-center">
         <Projects />
       </section>
-      <section id="all_projects" className="snap-center">
-        <AllProjects />
-      </section>
       {/* CONTACT ME */}
       <section id="contact" className="snap-start">
         <Contact />
@@ -88,7 +84,7 @@ export default function Home({ pageInfo, socials, skills, paths }: Props) {
   /* form validation https://www.youtube.com/watch?v=7j6xWy4P_LA */
 }
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const pageInfo: PageInfo[] = await fetchPageInfo();
   const skills: Skill[] = await fetchSkills();
   const socials: Socials[] = await fetchSocials();
