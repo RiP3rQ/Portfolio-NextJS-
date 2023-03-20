@@ -1,6 +1,5 @@
 import React from "react";
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
 import { urlFor } from "../sanity";
 import { Paths } from "../typings";
 

@@ -95,7 +95,7 @@ export default function Home({
   /* change img for next.image */
 }
 {
-  // all projects
+  // all projects sortowanie
 }
 
 export const getStaticProps: GetStaticProps = async () => {
