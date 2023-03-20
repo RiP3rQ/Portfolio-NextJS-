@@ -16,25 +16,21 @@ const Skills = ({ skills }: Props) => {
       className="min-h-screen flex relative flex-col text-center md:text-left md:flex-row max-w-[2000px] xl:px-10 
     justify-center mx-auto items-center xl:space-y-0"
     >
-      <h3 className="absolute top-24 uppercase tracking-[20px] text-gray-500 text-2xl">
+      <h3 className="absolute top-12 uppercase tracking-[20px] text-gray-500 text-2xl">
         Skills
       </h3>
 
-      <h4 className="absolute top-36 uppercase tracking-[3px] text-gray-500 text-sm">
+      <h4 className="absolute top-24 uppercase tracking-[3px] text-gray-500 text-sm">
         SKills that i learned throughout my journey as a developer
       </h4>
 
-      <h5 className="absolute top-40 uppercase tracking-[3px] text-gray-500 text-[10px]">
+      <h5 className="absolute top-36 uppercase tracking-[3px] text-gray-500 text-[10px]">
         ( Hover over a skill for current proficiency vs other juniors )
       </h5>
 
       {/* Render Skills Learned */}
       <div className="grid grid-cols-4 gap-5 mt-10">
-        {skills?.slice(0, skills.length / 2).map((skill) => (
-          <SkillItem key={skill._id} skill={skill} directionLeft />
-        ))}
-
-        {skills?.slice(skills.length / 2, skills.length).map((skill) => (
+        {skills?.map((skill) => (
           <SkillItem key={skill._id} skill={skill} />
         ))}
       </div>

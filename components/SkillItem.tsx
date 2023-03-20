@@ -4,17 +4,16 @@ import { Skills } from "../typings";
 import { urlFor } from "../sanity";
 
 type Props = {
-  directionLeft?: boolean;
   skill: Skills;
 };
 
-const SkillItem = ({ directionLeft, skill }: Props) => {
+const SkillItem = ({ skill }: Props) => {
   return (
     <div className="group relative flex cursor-pointer">
       <motion.img
-        initial={{ x: directionLeft ? -200 : 200, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.3 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 2 }}
         src={urlFor(skill?.image).url()}
         alt="skill_item"
         className="rounded-full border border-gray-500 object-contain w-20 h-20 md:h-24 md:w-24 
