@@ -30,10 +30,9 @@ const Projects = ({ projects }: Props) => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="min-h-screen flex relative flex-col text-center md:text-left md:flex-row max-w-[2000px] xl:px-10 
-    justify-center mx-auto items-center xl:space-y-0"
+      className="h-screen relative flex overflow-hidden flex-col text-left md:flex-row max-w-full justify-evenly mx-auto items-center z-0"
     >
-      <h3 className="absolute top-12 uppercase tracking-[20px] text-gray-500 text-2xl">
+      <h3 className="absolute top-10 uppercase tracking-[20px] text-gray-500 text-2xl">
         Projects
       </h3>
 
@@ -41,7 +40,7 @@ const Projects = ({ projects }: Props) => {
         Few of my projects, that i've done so far
       </h4>
 
-      <div className="absolute top-32 flex flex-row items-center justify-center space-x-8 mb-8">
+      <div className="absolute top-28 flex flex-row items-center justify-center space-x-8">
         {categories.map((category, index) => (
           <button
             className="heroButton"
@@ -54,13 +53,16 @@ const Projects = ({ projects }: Props) => {
       </div>
       {/* Project Cards */}
       <div
-        className="w-full flex space-x-5 overflow-x-scroll p-10 snap-x 
-      snap-mandatory scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80"
+        className="absolute top-36 bottom-20 flex w-full overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20 
+      scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80 text-center"
       >
         {projects?.map((project) => (
           <ProjectCard key={project._id} project={project} />
         ))}
       </div>
+
+      {/* Background */}
+      <div className="w-full absolute top-[30%] bg-[#F7AB0A]/10 left-0 h-[500px] -skew-y-12" />
     </motion.div>
   );
 };
