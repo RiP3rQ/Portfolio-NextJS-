@@ -44,24 +44,15 @@ export interface Technologies extends SanityBody {
   image: Image;
 }
 
-export interface MainProjects extends SanityBody {
-  _type: "mainProjects";
-  title: string;
-  image: Image;
-  linkToBuild: string;
-  linkToGithub: string;
-  summary: string;
-  technologies: Technologies[];
-}
-
 export interface Projects extends SanityBody {
   _type: "projects";
-  title: string;
+  name: string;
   image: Image;
   linkToBuild: string;
   linkToGithub: string;
   summary: string;
   technologies: Technologies[];
+  category: string;
 }
 
 export interface Paths extends SanityBody {

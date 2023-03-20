@@ -1,10 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import ProjectCard from "./ProjectCard";
+import { Projects } from "../typings";
 
-type Props = {};
+type Props = {
+  projects: Projects[];
+};
 
 const categories = [
+  "Main Projects",
   "Mobile Apps",
   "React Apps",
   "MERN Apps",
@@ -12,7 +16,15 @@ const categories = [
   "UI/UX",
 ];
 
-const Projects = (props: Props) => {
+const Projects = ({ projects }: Props) => {
+  const handleClick = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    category: string
+  ) => {
+    e.preventDefault();
+    console.log(category);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -29,9 +41,13 @@ const Projects = (props: Props) => {
         Few of my projects, that i've done so far
       </h4>
 
-      <div className="absolute top-32 flex flex-row items-center justify-center space-x-8">
+      <div className="absolute top-32 flex flex-row items-center justify-center space-x-8 mb-8">
         {categories.map((category, index) => (
-          <button className="heroButton" key={index}>
+          <button
+            className="heroButton"
+            key={index}
+            onClick={(e) => handleClick(e, category)}
+          >
             {category}
           </button>
         ))}
@@ -41,11 +57,9 @@ const Projects = (props: Props) => {
         className="w-full flex space-x-5 overflow-x-scroll p-10 snap-x 
       snap-mandatory scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80"
       >
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+        {projects?.map((project) => (
+          <ProjectCard key={project._id} project={project} />
+        ))}
       </div>
     </motion.div>
   );

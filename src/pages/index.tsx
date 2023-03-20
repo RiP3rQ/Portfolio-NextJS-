@@ -8,9 +8,16 @@ import Hero from "../../components/Hero";
 import Path from "../../components/Path";
 import Projects from "../../components/Projects";
 import Skills from "../../components/Skills";
-import { PageInfo, Paths, Skills as Skill, Socials } from "../../typings";
+import {
+  PageInfo,
+  Paths,
+  Projects as Projects2,
+  Skills as Skill,
+  Socials,
+} from "../../typings";
 import { fetchPageInfo } from "../../utils/fetchPageInfo";
 import { fetchPaths } from "../../utils/fetchPaths";
+import { fetchProjects } from "../../utils/fetchProjects";
 import { fetchSkills } from "../../utils/fetchSkills";
 import { fetchSocials } from "../../utils/fetchSocials";
 
@@ -19,9 +26,16 @@ type Props = {
   skills: Skill[];
   socials: Socials[];
   paths: Paths[];
+  projects: Projects2[];
 };
 
-export default function Home({ pageInfo, socials, skills, paths }: Props) {
+export default function Home({
+  pageInfo,
+  socials,
+  skills,
+  paths,
+  projects,
+}: Props) {
   return (
     <div
       className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-scroll 
@@ -52,7 +66,7 @@ export default function Home({ pageInfo, socials, skills, paths }: Props) {
       </section>
       {/* ALL PROJECTS */}
       <section id="projects" className="snap-center">
-        <Projects />
+        <Projects projects={projects} />
       </section>
       {/* CONTACT ME */}
       <section id="contact" className="snap-start">
@@ -81,10 +95,7 @@ export default function Home({ pageInfo, socials, skills, paths }: Props) {
   /* change img for next.image */
 }
 {
-  /* form validation https://www.youtube.com/watch?v=7j6xWy4P_LA */
-}
-{
-  /* react hot toasts */
+  // all projects
 }
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -92,6 +103,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const skills: Skill[] = await fetchSkills();
   const socials: Socials[] = await fetchSocials();
   const paths: Paths[] = await fetchPaths();
+  const projects: Projects2[] = await fetchProjects();
 
   return {
     props: {
@@ -99,6 +111,7 @@ export const getStaticProps: GetStaticProps = async () => {
       skills,
       socials,
       paths,
+      projects,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
