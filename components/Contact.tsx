@@ -2,6 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { MapPinIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { toast, Toaster } from "react-hot-toast";
 
 type Props = {};
 
@@ -12,14 +15,40 @@ type Inputs = {
   message: string;
 };
 
+const schema = yup.object({
+  name: yup.string().required("Name is required"),
+  email: yup.string().email().required("Email is required"),
+  title: yup.string().required("Title is required"),
+  message: yup.string().required("Message is required"),
+});
+
 const Contact = (props: Props) => {
-  const { register, handleSubmit, reset } = useForm<Inputs>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Inputs>({
+    resolver: yupResolver(schema),
+  });
   const onSubmit: SubmitHandler<Inputs> = (formData) => {
+    if (errors.name || errors.email || errors.title || errors.message) {
+      toast.error("Please fill all fields");
+      return;
+    }
+
+    const notification = toast.loading("Sending message...");
     fetch("/api/mail", {
       method: "POST",
       body: JSON.stringify(formData),
-    });
-    reset();
+    })
+      .then(() => {
+        reset();
+      })
+      .finally(() => {
+        toast.dismiss(notification);
+        toast.success("Message sent successfully!");
+      });
   };
 
   return (
@@ -30,6 +59,7 @@ const Contact = (props: Props) => {
       className="min-h-screen flex relative flex-col text-center md:text-left md:flex-row max-w-7xl px-10 
     justify-evenly mx-auto items-center"
     >
+      <Toaster position="top-center" />
       <h3 className="absolute top-24 uppercase tracking-[20px] text-gray-500 text-2xl">
         Contact Me
       </h3>
@@ -59,16 +89,24 @@ const Contact = (props: Props) => {
             <input
               {...register("name")}
               type="text"
-              className="contactInput"
+              className="contactInput flex-1"
               placeholder="Name*"
             />
             <input
               {...register("email")}
               type="email"
-              className="contactInput"
+              className="contactInput flex-1"
               placeholder="Email*"
             />
           </div>
+          {errors.name || errors.email ? (
+            <div className="flex flex-1 text-center justify-center items-center">
+              <div className="text-red-500 flex-1">{errors?.name?.message}</div>
+              <div className="text-red-500 flex-1">
+                {errors?.email?.message}
+              </div>
+            </div>
+          ) : null}
 
           <input
             {...register("title")}
@@ -77,11 +115,23 @@ const Contact = (props: Props) => {
             placeholder="Title*"
           />
 
+          {errors.title && (
+            <div className="flex flex-1 items-center justify-center">
+              <div className="text-red-500 ">{errors?.title?.message}</div>
+            </div>
+          )}
+
           <textarea
             {...register("message")}
             className="contactInput"
             placeholder="Message*"
           />
+
+          {errors.message && (
+            <div className="flex flex-1 items-center justify-center">
+              <div className="text-red-500">{errors?.message?.message}</div>
+            </div>
+          )}
 
           <button
             type="submit"

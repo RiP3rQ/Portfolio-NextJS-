@@ -83,6 +83,9 @@ export default function Home({ pageInfo, socials, skills, paths }: Props) {
 {
   /* form validation https://www.youtube.com/watch?v=7j6xWy4P_LA */
 }
+{
+  /* react hot toasts */
+}
 
 export const getStaticProps: GetStaticProps = async () => {
   const pageInfo: PageInfo[] = await fetchPageInfo();
