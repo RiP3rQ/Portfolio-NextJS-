@@ -89,13 +89,19 @@ export default function Home({
 }
 
 {
-  /* change text for own */
+  /* dodać rekordy do bazy, żeby ładnie wyświetlało */
 }
 {
-  /* change img for next.image */
+  /* zmienić img na next.image + dodać akceptowane domeny w pliku konfiguracyjnym */
 }
 {
-  // all projects sortowanie
+  // jezyk polski + przycisk do zmiany
+}
+{
+  // zmiana koloru + przycisk do zmiany
+}
+{
+  // responsyywność projektów na mobilnych urządzeniach
 }
 
 export const getStaticProps: GetStaticProps = async () => {
