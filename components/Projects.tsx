@@ -7,21 +7,24 @@ import { SanityClient } from "../sanity";
 
 type Props = {
   projects: Projects[];
+  polishLanguage: boolean;
 };
 
-const categories = [
-  "MAIN PROJECTS",
-  "MOBILE APPS",
-  "REACT APPS",
-  "MERN APPS",
-  "BLOCKCHAIN DAPPS",
+const categories = ["MAIN", "MOBILE", "REACT", "MERN", "BLOCKCHAIN", "UI/UX"];
+const categoriesPL = [
+  "GŁÓWNE",
+  "MOBILNE",
+  "REACT",
+  "MERN",
+  "BLOCKCHAIN",
   "UI/UX",
 ];
 
-const Projects = ({ projects }: Props) => {
-  const [activeCategory, setActiveCategory] = useState<string>("MAIN PROJECTS");
-  const [sorted, setSorted] = useState<boolean>(false);
-  const [sortedProjects, setSortedProjects] = useState<Projects[]>();
+const Projects = ({ projects, polishLanguage }: Props) => {
+  const [activeCategory, setActiveCategory] = useState<string>();
+  const [sortedProjects, setSortedProjects] = useState(projects);
+  const [categoriesState, setCategoriesState] = useState<string[]>(categories);
+  const [activeProjects, setActiveProjects] = useState(projects);
 
   const handleClick = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -29,23 +32,51 @@ const Projects = ({ projects }: Props) => {
   ) => {
     e.preventDefault();
     setActiveCategory(e.currentTarget.innerText);
-    setSorted(true);
   };
 
+  // POBIERANIE DANYCH PO ZMIANIE JĘZYKA
   const fetchData = async () => {
-    const query = groq`
-*[_type == "projects" && category == "${activeCategory}"] {
-  ...,
-  technologies[] ->
-}
-`;
-    const projects: Projects[] = await SanityClient.fetch(query);
-    setSortedProjects(projects);
+    console.log(polishLanguage);
+
+    if (polishLanguage) {
+      const projects: Projects[] = await SanityClient.fetch(
+        groq`*[_type == "projectsPL"] {
+          ...,
+          technologies[] ->
+        }`
+      );
+      setActiveProjects(projects);
+      setSortedProjects(projects);
+    }
+    if (!polishLanguage) {
+      const projects: Projects[] = await SanityClient.fetch(
+        groq`*[_type == "projects"] {
+          ...,
+          technologies[] ->
+        }`
+      );
+      setActiveProjects(projects);
+      setSortedProjects(projects);
+    }
   };
 
   useEffect(() => {
+    setActiveCategory("");
+    setCategoriesState(polishLanguage ? categoriesPL : categories);
     fetchData();
+  }, [polishLanguage]);
+
+  // SORTOWANIE PROJEKTÓW PO KATEGORII
+  useEffect(() => {
+    sortData();
   }, [activeCategory]);
+
+  const sortData = () => {
+    const projects = activeProjects.filter(
+      (project) => project.category === activeCategory
+    );
+    setSortedProjects(projects);
+  };
 
   return (
     <motion.div
@@ -55,11 +86,11 @@ const Projects = ({ projects }: Props) => {
       className="h-screen relative flex overflow-hidden flex-col text-left md:flex-row max-w-full justify-evenly mx-auto items-center z-0"
     >
       <h3 className="absolute top-16 md:top-10 uppercase tracking-[20px] text-gray-500 text-2xl">
-        Projects
+        {polishLanguage ? `Projekty` : "Projects"}
       </h3>
 
       <div className="absolute top-28 md:flex md:flex-row md:items-center md:justify-center md:space-x-8 grid grid-cols-3 z-30">
-        {categories.map((category, index) => (
+        {categoriesState.map((category, index) => (
           <button
             className={`projectsButton ${
               activeCategory === category &&
@@ -77,13 +108,9 @@ const Projects = ({ projects }: Props) => {
         className="absolute top-36 bottom-20 flex w-full overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20 
       scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80 text-center"
       >
-        {!sorted
-          ? projects?.map((project) => (
-              <ProjectCard key={project._id} project={project} />
-            ))
-          : sortedProjects?.map((project) => (
-              <ProjectCard key={project._id} project={project} />
-            ))}
+        {sortedProjects?.map((project) => (
+          <ProjectCard key={project._id} project={project} />
+        ))}
       </div>
 
       {/* Background */}

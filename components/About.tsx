@@ -35,7 +35,7 @@ const About = ({ pageInfo, polishLanguage }: Props) => {
         <h4 className="text-4xl font-semibold">
           {polishLanguage ? `Tutaj znajdziesz ` : "Here is a "}
           <span className="underline decoration-[#F7AB0A]/50">
-            {polishLanguage ? `parę ` : "little"}
+            {polishLanguage ? `kilka` : "little"}
           </span>{" "}
           {polishLanguage ? `informacji na mój temat` : "background"}
         </h4>

@@ -9,7 +9,7 @@ type Data = {
 };
 
 const query = groq`
-*[_type == "projects" && category == "MAIN PROJECTS"] {
+*[_type == "projects"] {
   ...,
   technologies[] ->
 }

@@ -20,6 +20,7 @@ import { fetchPageInfo } from "../../utils/fetchPageInfo";
 import { fetchPageInfoPL } from "../../utils/fetchPageInfoPL";
 import { fetchPaths } from "../../utils/fetchPaths";
 import { fetchProjects } from "../../utils/fetchProjects";
+import { fetchProjectsPL } from "../../utils/fetchProjectsPL";
 import { fetchSkills } from "../../utils/fetchSkills";
 import { fetchSocials } from "../../utils/fetchSocials";
 
@@ -47,13 +48,11 @@ export default function Home({
   const [pathsState, setPathsState] = useState(paths);
 
   // language state
-  const [polishLanguage, setPolishLanguage] = useState<boolean>();
+  const [polishLanguage, setPolishLanguage] = useState<boolean>(false);
 
   const updateLanguage = (languageChildState: boolean) => {
     setPolishLanguage(languageChildState);
   };
-
-  console.log(skillsState);
 
   const refetchDataPL = async () => {
     const pageInfoPL: PageInfo = await fetchPageInfoPL();
@@ -106,7 +105,7 @@ export default function Home({
     z-0 overflow-x-hidden scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80"
     >
       <Head>
-        <title>RiP3rQ Portfolio</title>
+        <title>RiP3rQ</title>
         <meta name="description" content="Portfolio uzytkownika RiP3rQ" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -134,7 +133,7 @@ export default function Home({
       </section>
       {/* ALL PROJECTS */}
       <section id="projects" className="snap-center">
-        <Projects projects={projects} />
+        <Projects projects={projectsState} polishLanguage={polishLanguage} />
       </section>
       {/* CONTACT ME */}
       <section id="contact" className="snap-start">
@@ -154,10 +153,6 @@ export default function Home({
       </Link>
     </div>
   );
-}
-
-{
-  /* dodać rekordy do bazy, żeby ładnie wyświetlało */
 }
 
 export const getStaticProps: GetStaticProps = async () => {
