@@ -92,14 +92,9 @@ export default function Home({
   /* dodać rekordy do bazy, żeby ładnie wyświetlało */
 }
 {
-  /* zmienić img na next.image + dodać akceptowane domeny w pliku konfiguracyjnym */
-}
-{
   // jezyk polski + przycisk do zmiany
 }
-{
-  // zmiana koloru + przycisk do zmiany
-}
+
 {
   // responsyywność projektów na mobilnych urządzeniach
 }

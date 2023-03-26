@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
+import { urlFor } from "../sanity";
 import { PageInfo } from "../typings";
 import BackgroundCircles from "./BackgroundCircles";
 
@@ -23,7 +24,7 @@ const Hero = ({ pageInfo }: Props) => {
     <div className="h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden">
       <BackgroundCircles />
       <img
-        src="https://cdn-icons-png.flaticon.com/512/3048/3048127.png"
+        src={urlFor(pageInfo.profilePic).url()}
         alt="Profile Image"
         className="relative rounded-full h-32 w-32 mx-auto object-cover"
       />
