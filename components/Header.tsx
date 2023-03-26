@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Socials } from "../typings";
-import { EnvelopeIcon } from "@heroicons/react/24/solid";
+import { EnvelopeIcon, LanguageIcon } from "@heroicons/react/24/solid";
 
 type Props = {
   socials: Socials[];
+  updateLanguage: (languageChildState: boolean) => void;
 };
 
-const Header = ({ socials }: Props) => {
+const Header = ({ socials, updateLanguage }: Props) => {
+  const [polishLanguage, setPolishLanguage] = useState<boolean>(false);
+
+  useEffect(() => {
+    updateLanguage(polishLanguage);
+  }, [polishLanguage]);
+
   return (
     <header
       className="sticky top-0 p-5 flex items-start justify-between 
@@ -44,23 +51,30 @@ const Header = ({ socials }: Props) => {
       </motion.div>
 
       {/* RIGTH */}
-      <Link href="#contact">
-        <motion.div
-          initial={{
-            opacity: 0,
-            x: 200,
-            scale: 0.5,
-          }}
-          animate={{
-            x: 0,
-            opacity: 1,
-            scale: 1,
-          }}
-          transition={{
-            duration: 1.5,
-          }}
-          className="flex items-center text-gray-300 cursor-pointer justify-center space-x-2"
-        >
+
+      <motion.div
+        initial={{
+          opacity: 0,
+          x: 200,
+          scale: 0.5,
+        }}
+        animate={{
+          x: 0,
+          opacity: 1,
+          scale: 1,
+        }}
+        transition={{
+          duration: 1.5,
+        }}
+        className="flex items-center text-gray-300  justify-center space-x-2"
+      >
+        {/* CHANGE LANGUAGE */}
+        <LanguageIcon
+          className="h-6 w-6 cursor-pointer bg-transparent text-gray-500 mr-3"
+          onClick={() => setPolishLanguage(!polishLanguage)}
+        />
+        {/* LINK TO CONTACT FORM */}
+        <Link href="#contact" className="flex space-x-2 items-center">
           <EnvelopeIcon
             className="cursor-pointer bg-transparent text-gray-500 
           h-6 w-6"
@@ -68,8 +82,8 @@ const Header = ({ socials }: Props) => {
           <p className="uppercase hidden md:inline-flex text-sm text-gray-400">
             Get in touch
           </p>
-        </motion.div>
-      </Link>
+        </Link>
+      </motion.div>
     </header>
   );
 };

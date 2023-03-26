@@ -10,6 +10,8 @@ type Props = {
 const PathCard = ({ path }: Props) => {
   return (
     <VerticalTimelineElement
+      key={path?._id}
+      id={path?._id}
       contentStyle={{ background: "rgb(148 163 184 / 0.1)", color: "#fff" }}
       contentArrowStyle={{ borderRight: "7px solid  rgb(148 163 184 / 0.1)" }}
       date={`${path?.startingDate} - ${

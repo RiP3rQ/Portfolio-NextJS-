@@ -5,8 +5,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast, Toaster } from "react-hot-toast";
+import { PageInfo } from "../typings";
 
-type Props = {};
+type Props = {
+  pageInfo: PageInfo;
+};
 
 type Inputs = {
   name: string;
@@ -22,7 +25,7 @@ const schema = yup.object({
   message: yup.string().required("Message is required"),
 });
 
-const Contact = (props: Props) => {
+const Contact = ({ pageInfo }: Props) => {
   const {
     register,
     handleSubmit,
@@ -73,11 +76,11 @@ const Contact = (props: Props) => {
         <div className="space-y-5">
           <div className="flex items-center space-x-5 justify-center">
             <MapPinIcon className="text-[#F7AB0A] h-7 w-7 animate-pulse" />
-            <p>Based in Poland</p>
+            <p>{pageInfo.address}</p>
           </div>
           <div className="flex items-center space-x-5 justify-center">
             <EnvelopeIcon className="text-[#F7AB0A] h-7 w-7 animate-pulse" />
-            <p>rafalpompa2000@gmail.com</p>
+            <p>{pageInfo.email}</p>
           </div>
         </div>
 

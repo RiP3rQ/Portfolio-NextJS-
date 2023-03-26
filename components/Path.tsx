@@ -14,7 +14,7 @@ const Path = ({ paths }: Props) => {
     <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      transition={{ duration: 2.5 }}
+      transition={{ duration: 1 }}
       className="min-h-screen flex relative flex-col text-center md:text-left md:flex-row max-w-7xl xl:px-10 
     justify-center mx-auto items-center xl:space-y-0"
     >

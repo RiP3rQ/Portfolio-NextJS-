@@ -1,6 +1,7 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import About from "../../components/About";
 import Contact from "../../components/Contact";
 import Header from "../../components/Header";
@@ -16,6 +17,7 @@ import {
   Socials,
 } from "../../typings";
 import { fetchPageInfo } from "../../utils/fetchPageInfo";
+import { fetchPageInfoPL } from "../../utils/fetchPageInfoPL";
 import { fetchPaths } from "../../utils/fetchPaths";
 import { fetchProjects } from "../../utils/fetchProjects";
 import { fetchSkills } from "../../utils/fetchSkills";
@@ -27,6 +29,7 @@ type Props = {
   socials: Socials[];
   paths: Paths[];
   projects: Projects2[];
+  language: boolean;
 };
 
 export default function Home({
@@ -35,7 +38,38 @@ export default function Home({
   skills,
   paths,
   projects,
+  language,
 }: Props) {
+  // initial state (socials not needed || in both langs the same || (same with path only Description need translation) )
+  const [pageInfoState, setPageInfoState] = useState(pageInfo);
+  const [skillsState, setSkillsState] = useState(skills);
+  const [projectsState, setProjectsState] = useState(projects);
+
+  // language state
+  const [polishLanguage, setPolishLanguage] = useState<boolean>(false);
+
+  const updateLanguage = (languageChildState: boolean) => {
+    setPolishLanguage(languageChildState);
+  };
+
+  const refetchDataPL = async () => {
+    const pageInfoPL: PageInfo = await fetchPageInfoPL();
+    setPageInfoState(pageInfoPL);
+  };
+
+  const refetchDataEN = async () => {
+    const pageInfo: PageInfo = await fetchPageInfo();
+    setPageInfoState(pageInfo);
+  };
+
+  useEffect(() => {
+    if (polishLanguage === true) {
+      refetchDataPL();
+    } else {
+      refetchDataEN();
+    }
+  }, [polishLanguage]);
+
   return (
     <div
       className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-scroll 
@@ -47,14 +81,18 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       {/* HEADER */}
-      <Header socials={socials} />
+      <Header
+        socials={socials}
+        updateLanguage={updateLanguage}
+        polishLanguage={polishLanguage}
+      />
       {/* HERO */}
       <section id="hero" className="snap-start">
-        <Hero pageInfo={pageInfo} />
+        <Hero pageInfo={pageInfoState} />
       </section>
       {/* ABOUT */}
       <section id="about" className="snap-center">
-        <About pageInfo={pageInfo} />
+        <About pageInfo={pageInfoState} />
       </section>
       {/* PATH */}
       <section id="path" className="snap-center">
@@ -70,7 +108,7 @@ export default function Home({
       </section>
       {/* CONTACT ME */}
       <section id="contact" className="snap-start">
-        <Contact />
+        <Contact pageInfo={pageInfoState} />
       </section>
 
       <Link href="#hero">
@@ -91,13 +129,6 @@ export default function Home({
 {
   /* dodać rekordy do bazy, żeby ładnie wyświetlało */
 }
-{
-  // jezyk polski + przycisk do zmiany
-}
-
-{
-  // responsyywność projektów na mobilnych urządzeniach
-}
 
 export const getStaticProps: GetStaticProps = async () => {
   const pageInfo: PageInfo[] = await fetchPageInfo();
@@ -117,6 +148,6 @@ export const getStaticProps: GetStaticProps = async () => {
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
     // - At most once every 60 second
-    revalidate: 60,
+    // revalidate: 60,
   };
 };
