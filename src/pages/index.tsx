@@ -20,7 +20,6 @@ import { fetchPageInfo } from "../../utils/fetchPageInfo";
 import { fetchPageInfoPL } from "../../utils/fetchPageInfoPL";
 import { fetchPaths } from "../../utils/fetchPaths";
 import { fetchProjects } from "../../utils/fetchProjects";
-import { fetchProjectsPL } from "../../utils/fetchProjectsPL";
 import { fetchSkills } from "../../utils/fetchSkills";
 import { fetchSocials } from "../../utils/fetchSocials";
 
