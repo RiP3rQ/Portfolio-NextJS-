@@ -7,9 +7,10 @@ import BackgroundCircles from "./BackgroundCircles";
 
 type Props = {
   pageInfo: PageInfo;
+  polishLanguage: boolean;
 };
 
-const Hero = ({ pageInfo }: Props) => {
+const Hero = ({ pageInfo, polishLanguage }: Props) => {
   const [text, count] = useTypewriter({
     words: pageInfo.heroText,
     loop: true,
@@ -35,16 +36,24 @@ const Hero = ({ pageInfo }: Props) => {
 
         <div className="pt-5">
           <Link href="#about">
-            <button className="heroButton">About</button>
+            <button className="heroButton">
+              {polishLanguage ? "O mnie" : "About"}
+            </button>
           </Link>
           <a href="#path">
-            <button className="heroButton">Path</button>
+            <button className="heroButton">
+              {polishLanguage ? "Ścieżka rozwoju" : "Path"}
+            </button>
           </a>
           <Link href="#skills">
-            <button className="heroButton">Skills</button>
+            <button className="heroButton">
+              {polishLanguage ? "Umiejętności" : "Skills"}
+            </button>
           </Link>
           <Link href="#projects">
-            <button className="heroButton">Projects</button>
+            <button className="heroButton">
+              {polishLanguage ? "Projekty" : "Projects"}
+            </button>
           </Link>
         </div>
       </div>

@@ -9,6 +9,7 @@ import { PageInfo } from "../typings";
 
 type Props = {
   pageInfo: PageInfo;
+  polishLanguage: boolean;
 };
 
 type Inputs = {
@@ -25,7 +26,7 @@ const schema = yup.object({
   message: yup.string().required("Message is required"),
 });
 
-const Contact = ({ pageInfo }: Props) => {
+const Contact = ({ pageInfo, polishLanguage }: Props) => {
   const {
     register,
     handleSubmit,
@@ -64,13 +65,18 @@ const Contact = ({ pageInfo }: Props) => {
     >
       <Toaster position="top-center" />
       <h3 className="absolute top-24 uppercase tracking-[20px] text-gray-500 text-2xl">
-        Contact Me
+        {polishLanguage ? "Kontakt" : "Contact Me"}
       </h3>
 
       <div className="flex flex-col space-y-10">
         <h4 className="text-4xl font-semibold text-center">
-          I have got just what you need.{" "}
-          <span className="decoration-[#F7AB0A]/50 underline">Lets Talk.</span>
+          {polishLanguage
+            ? `Mam dokładnie to, czego potrzebujesz. `
+            : `I have got just what you need. `}
+
+          <span className="decoration-[#F7AB0A]/50 underline">
+            {polishLanguage ? "Porozmawiajmy" : "Lets Talk."}
+          </span>
         </h4>
 
         <div className="space-y-5">
@@ -93,7 +99,7 @@ const Contact = ({ pageInfo }: Props) => {
               {...register("name")}
               type="text"
               className="contactInput flex-1"
-              placeholder="Name*"
+              placeholder={polishLanguage ? "Imię*" : "Name*"}
             />
             <input
               {...register("email")}
@@ -115,7 +121,7 @@ const Contact = ({ pageInfo }: Props) => {
             {...register("title")}
             type="text"
             className="contactInput"
-            placeholder="Title*"
+            placeholder={polishLanguage ? "Tytuł*" : "Title*"}
           />
 
           {errors.title && (
@@ -127,7 +133,7 @@ const Contact = ({ pageInfo }: Props) => {
           <textarea
             {...register("message")}
             className="contactInput"
-            placeholder="Message*"
+            placeholder={polishLanguage ? "Wiadomość*" : "Message*"}
           />
 
           {errors.message && (
@@ -140,7 +146,7 @@ const Contact = ({ pageInfo }: Props) => {
             type="submit"
             className="bg-[#F7AB0A] py-5 px-10 rounded-md text-black font-bold text-lg"
           >
-            Send
+            {polishLanguage ? "Wyślij" : "Send"}
           </button>
         </form>
       </div>

@@ -5,9 +5,10 @@ import { urlFor } from "../sanity";
 
 type Props = {
   pageInfo: PageInfo;
+  polishLanguage: boolean;
 };
 
-const About = ({ pageInfo }: Props) => {
+const About = ({ pageInfo, polishLanguage }: Props) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -17,7 +18,7 @@ const About = ({ pageInfo }: Props) => {
     md:flex-row max-w-7xl px-10 justify-evenly mx-auto items-center"
     >
       <h3 className="absolute top-24 uppercase tracking-[20px] text-gray-500 text-2xl">
-        About
+        {polishLanguage ? "O mnie" : "About"}
       </h3>
 
       <motion.img
@@ -32,9 +33,11 @@ const About = ({ pageInfo }: Props) => {
 
       <div className="space-y-10 px-0 md:px-10">
         <h4 className="text-4xl font-semibold">
-          Here is a{" "}
-          <span className="underline decoration-[#F7AB0A]/50">little</span>{" "}
-          background
+          {polishLanguage ? `Tutaj znajdziesz ` : "Here is a "}
+          <span className="underline decoration-[#F7AB0A]/50">
+            {polishLanguage ? `parę ` : "little"}
+          </span>{" "}
+          {polishLanguage ? `informacji na mój temat` : "background"}
         </h4>
         <p className="text-base">{pageInfo?.backgroundInfo}</p>
       </div>

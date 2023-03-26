@@ -8,9 +8,14 @@ import { EnvelopeIcon, LanguageIcon } from "@heroicons/react/24/solid";
 type Props = {
   socials: Socials[];
   updateLanguage: (languageChildState: boolean) => void;
+  polishLanguage: boolean;
 };
 
-const Header = ({ socials, updateLanguage }: Props) => {
+const Header = ({
+  socials,
+  updateLanguage,
+  polishLanguage: PlLanguage,
+}: Props) => {
   const [polishLanguage, setPolishLanguage] = useState<boolean>(false);
 
   useEffect(() => {
@@ -80,7 +85,7 @@ const Header = ({ socials, updateLanguage }: Props) => {
           h-6 w-6"
           />
           <p className="uppercase hidden md:inline-flex text-sm text-gray-400">
-            Get in touch
+            {PlLanguage ? "Skontaktuj się" : "Get in touch"}
           </p>
         </Link>
       </motion.div>

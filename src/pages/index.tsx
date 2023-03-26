@@ -40,32 +40,62 @@ export default function Home({
   projects,
   language,
 }: Props) {
-  // initial state (socials not needed || in both langs the same || (same with path only Description need translation) )
+  // initial state (socials not needed || in both langs the same )
   const [pageInfoState, setPageInfoState] = useState(pageInfo);
   const [skillsState, setSkillsState] = useState(skills);
   const [projectsState, setProjectsState] = useState(projects);
+  const [pathsState, setPathsState] = useState(paths);
 
   // language state
-  const [polishLanguage, setPolishLanguage] = useState<boolean>(false);
+  const [polishLanguage, setPolishLanguage] = useState<boolean>();
 
   const updateLanguage = (languageChildState: boolean) => {
     setPolishLanguage(languageChildState);
   };
 
+  console.log(skillsState);
+
   const refetchDataPL = async () => {
     const pageInfoPL: PageInfo = await fetchPageInfoPL();
     setPageInfoState(pageInfoPL);
+    setPathsState(
+      pathsState.map((path) => ({
+        ...path,
+        description: "Dodatkowe poznane technologie przy tworzeniu projektów",
+      }))
+    );
+    setSkillsState(
+      skillsState.map((skill) => ({
+        ...skill,
+        progress: `${skill.progress == "Advanced" ? "Dobry" : "Przeciętny"}`,
+      }))
+    );
   };
 
   const refetchDataEN = async () => {
     const pageInfo: PageInfo = await fetchPageInfo();
     setPageInfoState(pageInfo);
+    setPathsState(
+      paths.map((path) => ({
+        ...path,
+        description: "Additional learned technologies when creating projects",
+      }))
+    );
+    if (skillsState[0].progress == "Dobry") {
+      setSkillsState(
+        skillsState.map((skill) => ({
+          ...skill,
+          progress: `${skill.progress == "Dobry" ? "Advanced" : "Average"}`,
+        }))
+      );
+    }
   };
 
   useEffect(() => {
     if (polishLanguage === true) {
       refetchDataPL();
-    } else {
+    }
+    if (polishLanguage === false) {
       refetchDataEN();
     }
   }, [polishLanguage]);
@@ -88,19 +118,19 @@ export default function Home({
       />
       {/* HERO */}
       <section id="hero" className="snap-start">
-        <Hero pageInfo={pageInfoState} />
+        <Hero pageInfo={pageInfoState} polishLanguage={polishLanguage} />
       </section>
       {/* ABOUT */}
       <section id="about" className="snap-center">
-        <About pageInfo={pageInfoState} />
+        <About pageInfo={pageInfoState} polishLanguage={polishLanguage} />
       </section>
       {/* PATH */}
       <section id="path" className="snap-center">
-        <Path paths={paths} />
+        <Path paths={pathsState} polishLanguage={polishLanguage} />
       </section>
       {/* SKILLS */}
       <section id="skills" className="snap-center">
-        <Skills skills={skills} />
+        <Skills skills={skillsState} polishLanguage={polishLanguage} />
       </section>
       {/* ALL PROJECTS */}
       <section id="projects" className="snap-center">
@@ -108,7 +138,7 @@ export default function Home({
       </section>
       {/* CONTACT ME */}
       <section id="contact" className="snap-start">
-        <Contact pageInfo={pageInfoState} />
+        <Contact pageInfo={pageInfoState} polishLanguage={polishLanguage} />
       </section>
 
       <Link href="#hero">

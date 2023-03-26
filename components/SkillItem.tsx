@@ -25,10 +25,10 @@ const SkillItem = ({ skill }: Props) => {
       >
         <div className="flex items-center justify-center h-full">
           <p className="text-base font-bold text-black opacity-100">
-            {skill?.progress == "Advanced" ? (
-              <span className="text-green-600">Advanced</span>
+            {skill?.progress == "Advanced" || skill?.progress == "Dobry" ? (
+              <span className="text-green-600">{skill.progress}</span>
             ) : (
-              <span className="text-yellow-500">Average</span>
+              <span className="text-yellow-500">{skill.progress}</span>
             )}
           </p>
         </div>

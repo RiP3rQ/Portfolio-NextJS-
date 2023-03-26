@@ -7,9 +7,10 @@ import { Paths } from "../typings";
 
 type Props = {
   paths: Paths[];
+  polishLanguage: boolean;
 };
 
-const Path = ({ paths }: Props) => {
+const Path = ({ paths, polishLanguage }: Props) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -19,11 +20,13 @@ const Path = ({ paths }: Props) => {
     justify-center mx-auto items-center xl:space-y-0"
     >
       <h3 className="absolute top-12 uppercase tracking-[20px] text-gray-500 text-2xl">
-        My Path
+        {polishLanguage ? `Moja ścieżka` : "My Path"}
       </h3>
 
       <h4 className="absolute top-20 uppercase tracking-[3px] text-gray-500 text-sm">
-        Main Frameworks i have learned so far
+        {polishLanguage
+          ? `Główne frameworki, których nauczyłem się do tej pory`
+          : "Main Frameworks i have learned so far"}
       </h4>
 
       <div className="absolute top-28 left-0 right-0 flex flex-col flex-1">
