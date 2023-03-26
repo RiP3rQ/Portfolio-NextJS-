@@ -33,11 +33,11 @@ type Props = {
 };
 
 export default function Home({
-  pageInfo,
-  socials,
-  skills,
-  paths,
-  projects,
+  pageInfo = [],
+  socials = [],
+  skills = [],
+  paths = [],
+  projects = [],
   language,
 }: Props) {
   // initial state (socials not needed || in both langs the same )
