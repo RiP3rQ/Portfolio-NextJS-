@@ -24,7 +24,7 @@ import { fetchSkills } from "../../utils/fetchSkills";
 import { fetchSocials } from "../../utils/fetchSocials";
 
 type Props = {
-  pageInfo: PageInfo;
+  pageInfo: PageInfo[];
   skills: Skill[];
   socials: Socials[];
   paths: Paths[];
@@ -55,7 +55,7 @@ export default function Home({
 
   const refetchDataPL = async () => {
     const pageInfoPL: PageInfo[] = await fetchPageInfoPL();
-    setPageInfoState(pageInfoPL[0]);
+    setPageInfoState(pageInfoPL);
     setPathsState(
       pathsState.map((path) => ({
         ...path,
@@ -72,7 +72,7 @@ export default function Home({
 
   const refetchDataEN = async () => {
     const pageInfo: PageInfo[] = await fetchPageInfo();
-    setPageInfoState(pageInfo[0]);
+    setPageInfoState(pageInfo);
     setPathsState(
       paths.map((path) => ({
         ...path,

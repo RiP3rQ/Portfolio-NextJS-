@@ -8,7 +8,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { PageInfo } from "../typings";
 
 type Props = {
-  pageInfo: PageInfo;
+  pageInfo: PageInfo[];
   polishLanguage: boolean;
 };
 
@@ -82,11 +82,11 @@ const Contact = ({ pageInfo, polishLanguage }: Props) => {
         <div className="space-y-5">
           <div className="flex items-center space-x-5 justify-center">
             <MapPinIcon className="text-[#F7AB0A] h-7 w-7 animate-pulse" />
-            <p>{pageInfo.address}</p>
+            <p>{pageInfo[0].address}</p>
           </div>
           <div className="flex items-center space-x-5 justify-center">
             <EnvelopeIcon className="text-[#F7AB0A] h-7 w-7 animate-pulse" />
-            <p>{pageInfo.email}</p>
+            <p>{pageInfo[0].email}</p>
           </div>
         </div>
 

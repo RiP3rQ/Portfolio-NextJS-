@@ -6,28 +6,32 @@ import { PageInfo } from "../typings";
 import BackgroundCircles from "./BackgroundCircles";
 
 type Props = {
-  pageInfo: PageInfo;
+  pageInfo: PageInfo[];
   polishLanguage: boolean;
 };
 
 const Hero = ({ pageInfo, polishLanguage }: Props) => {
   const [text, count] = useTypewriter({
-    words: pageInfo.heroText,
+    words: [
+      pageInfo[0].heroText[0],
+      pageInfo[0].heroText[1],
+      pageInfo[0].heroText[2],
+    ],
     loop: true,
-    delaySpeed: 2000,
+    delaySpeed: 20,
   });
 
   return (
     <div className="h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden">
       <BackgroundCircles />
       <img
-        src={urlFor(pageInfo.profilePic).url()}
+        src={urlFor(pageInfo[0].profilePic).url()}
         alt="Profile Image"
         className="relative rounded-full h-32 w-32 mx-auto object-cover"
       />
       <div className="z-20">
         <h2 className="text-sm uppercase text-gray-500 pb-2 tracking-[15px] ">
-          {pageInfo?.role}
+          {pageInfo[0].role}
         </h2>
         <h1 className="text-2xl md:text-4xl xl:text-6xl font-semibold px-10">
           <span className="mr-1">{text}</span>

@@ -4,7 +4,7 @@ import { PageInfo } from "../typings";
 import { urlFor } from "../sanity";
 
 type Props = {
-  pageInfo: PageInfo;
+  pageInfo: PageInfo[];
   polishLanguage: boolean;
 };
 
@@ -26,7 +26,7 @@ const About = ({ pageInfo, polishLanguage }: Props) => {
         whileInView={{ x: 0, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1.5 }}
-        src={urlFor(pageInfo?.profilePic).url()}
+        src={urlFor(pageInfo[0].profilePic).url()}
         className="-mb-20 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full object-cover 
         md:rounded-lg md:w-64 md:h-96"
       />
@@ -39,7 +39,7 @@ const About = ({ pageInfo, polishLanguage }: Props) => {
           </span>{" "}
           {polishLanguage ? `informacji na mój temat` : "background"}
         </h4>
-        <p className="text-base">{pageInfo?.backgroundInfo}</p>
+        <p className="text-base">{pageInfo[0].backgroundInfo}</p>
       </div>
     </motion.div>
   );

@@ -9,7 +9,7 @@ type Data = {
 };
 
 const query = groq`
-*[_type == "pageInfoPL"][0] 
+*[_type == "pageInfoPL"]
 `;
 
 export default async function handler(
