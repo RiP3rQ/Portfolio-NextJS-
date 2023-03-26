@@ -54,8 +54,8 @@ export default function Home({
   };
 
   const refetchDataPL = async () => {
-    const pageInfoPL: PageInfo = await fetchPageInfoPL();
-    setPageInfoState(pageInfoPL);
+    const pageInfoPL: PageInfo[] = await fetchPageInfoPL();
+    setPageInfoState(pageInfoPL[0]);
     setPathsState(
       pathsState.map((path) => ({
         ...path,
@@ -71,8 +71,8 @@ export default function Home({
   };
 
   const refetchDataEN = async () => {
-    const pageInfo: PageInfo = await fetchPageInfo();
-    setPageInfoState(pageInfo);
+    const pageInfo: PageInfo[] = await fetchPageInfo();
+    setPageInfoState(pageInfo[0]);
     setPathsState(
       paths.map((path) => ({
         ...path,
