@@ -13,9 +13,9 @@ type Props = {
 const Hero = ({ pageInfo, polishLanguage }: Props) => {
   const [text, count] = useTypewriter({
     words: [
-      pageInfo[0].heroText[0],
-      pageInfo[0].heroText[1],
-      pageInfo[0].heroText[2],
+      pageInfo[0]?.heroText[0],
+      pageInfo[0]?.heroText[1],
+      pageInfo[0]?.heroText[2],
     ],
     loop: true,
     delaySpeed: 20,
@@ -25,13 +25,13 @@ const Hero = ({ pageInfo, polishLanguage }: Props) => {
     <div className="h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden">
       <BackgroundCircles />
       <img
-        src={urlFor(pageInfo[0].profilePic).url()}
+        src={urlFor(pageInfo[0]?.profilePic).url()}
         alt="Profile Image"
         className="relative rounded-full h-32 w-32 mx-auto object-cover"
       />
       <div className="z-20">
         <h2 className="text-sm uppercase text-gray-500 pb-2 tracking-[15px] ">
-          {pageInfo[0].role}
+          {pageInfo[0]?.role}
         </h2>
         <h1 className="text-2xl md:text-4xl xl:text-6xl font-semibold px-10">
           <span className="mr-1">{text}</span>

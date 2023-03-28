@@ -36,7 +36,7 @@ const Skills = ({ skills, polishLanguage }: Props) => {
       {/* Render Skills Learned */}
       <div className="grid grid-cols-4 gap-5 mt-10">
         {skills?.map((skill) => (
-          <SkillItem key={skill._id} skill={skill} />
+          <SkillItem key={skill?._id} skill={skill} />
         ))}
       </div>
     </motion.div>

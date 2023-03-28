@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -33,11 +33,11 @@ type Props = {
 };
 
 export default function Home({
-  pageInfo = [],
-  socials = [],
-  skills = [],
-  paths = [],
-  projects = [],
+  pageInfo,
+  socials,
+  skills,
+  paths,
+  projects,
   language,
 }: Props) {
   // initial state (socials not needed || in both langs the same )
@@ -154,7 +154,7 @@ export default function Home({
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const pageInfo: PageInfo[] = await fetchPageInfo();
   const skills: Skill[] = await fetchSkills();
   const socials: Socials[] = await fetchSocials();

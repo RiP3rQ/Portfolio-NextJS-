@@ -17,8 +17,8 @@ const ProjectCard = ({ project }: Props) => {
         viewport={{ once: true }}
         transition={{ duration: 1.5 }}
         className="w-96 h-72 xl:h-[300px] xl:w-[400px] object-contain"
-        src={urlFor(project.image).url()}
-        alt={project.name}
+        src={urlFor(project?.image).url()}
+        alt={project?.name}
       />
 
       <motion.div
@@ -27,11 +27,11 @@ const ProjectCard = ({ project }: Props) => {
         transition={{ duration: 1.5 }}
         className="px-0 md:px-10 mt-0"
       >
-        <h4 className="text-4xl font-bold">{project.name}</h4>
+        <h4 className="text-4xl font-bold">{project?.name}</h4>
         <p className="font-light text-2xl mt-1">Technologies used:</p>
         <div className="flex space-x-2 my-2 items-center justify-center">
           {/* Tech used  */}
-          {project.technologies.map((tech, index) => (
+          {project?.technologies.map((tech, index) => (
             <img
               key={index}
               src={urlFor(tech.image).url()}
@@ -41,12 +41,12 @@ const ProjectCard = ({ project }: Props) => {
           ))}
         </div>
         <div className="text-xs md:text-left md:text-lg mt-1 max-w-2xl">
-          <p className=" text-center">{project.summary}</p>
+          <p className=" text-center">{project?.summary}</p>
         </div>
         <div className="flex flex-1 items-center justify-center space-x-4 mt-2">
           <button className="heroButton py-1 px-2 flex items-center justify-center pr-4">
             <SocialIcon
-              url={project.linkToGithub}
+              url={project?.linkToGithub}
               fgColor="gray"
               bgColor="transparent"
               target="_blank"
@@ -55,7 +55,7 @@ const ProjectCard = ({ project }: Props) => {
           </button>
           <button className="heroButton py-1 px-2 flex items-center justify-center pr-4">
             <SocialIcon
-              url={project.linkToBuild}
+              url={project?.linkToBuild}
               fgColor="gray"
               bgColor="transparent"
               target="_blank"
