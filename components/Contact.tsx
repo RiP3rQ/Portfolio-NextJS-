@@ -42,7 +42,7 @@ const Contact = ({ pageInfo, polishLanguage }: Props) => {
     }
 
     const notification = toast.loading("Sending message...");
-    fetch("/api/mail", {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/mail`, {
       method: "POST",
       body: JSON.stringify(formData),
     })
