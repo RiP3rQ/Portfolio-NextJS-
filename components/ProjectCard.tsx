@@ -2,7 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Projects } from "../typings";
 import { urlFor } from "../sanity";
-import { SocialIcon } from "react-social-icons";
+import {
+  CommandLineIcon,
+  DevicePhoneMobileIcon,
+} from "@heroicons/react/24/solid";
 
 type Props = {
   project: Projects;
@@ -44,24 +47,22 @@ const ProjectCard = ({ project }: Props) => {
           <p className=" text-center">{project?.summary}</p>
         </div>
         <div className="flex flex-1 items-center justify-center space-x-4 mt-2">
-          <button className="heroButton py-1 px-2 flex items-center justify-center pr-4">
-            <SocialIcon
-              url={project?.linkToGithub}
-              fgColor="gray"
-              bgColor="transparent"
-              target="_blank"
-            />{" "}
-            <span className="text-base">Github</span>
-          </button>
-          <button className="heroButton py-1 px-2 flex items-center justify-center pr-4">
-            <SocialIcon
-              url={project?.linkToBuild}
-              fgColor="gray"
-              bgColor="transparent"
-              target="_blank"
-            />{" "}
-            <span className="text-base">Demo</span>
-          </button>
+          <a
+            href={project?.linkToGithub}
+            target="_blank"
+            className="heroButton py-3 px-6 flex items-center justify-center pr-5 space-x-2"
+          >
+            <CommandLineIcon className="h-6 w-6 text-gray-500 " />
+            <span className="text-base font-bold">Github</span>
+          </a>
+          <a
+            href={project?.linkToBuild}
+            className="heroButton py-3 px-6 flex items-center justify-center pr-5 space-x-2"
+            target="_blank"
+          >
+            <DevicePhoneMobileIcon className="h-6 w-6 text-gray-500" />
+            <span className="text-base font-bold">Demo</span>
+          </a>
         </div>
       </motion.div>
     </div>
