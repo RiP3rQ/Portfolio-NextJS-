@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPinIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -19,6 +19,10 @@ type Inputs = {
   message: string;
 };
 
+type Response = {
+  status: string;
+};
+
 const schema = yup.object({
   name: yup.string().required("Name is required"),
   email: yup.string().email().required("Email is required"),
@@ -27,6 +31,8 @@ const schema = yup.object({
 });
 
 const Contact = ({ pageInfo, polishLanguage }: Props) => {
+  const [response, setResponse] = useState<Response>();
+
   const {
     register,
     handleSubmit,
@@ -46,12 +52,25 @@ const Contact = ({ pageInfo, polishLanguage }: Props) => {
       method: "POST",
       body: JSON.stringify(formData),
     })
-      .then(() => {
-        reset();
+      .then((res) => res.json())
+      .then((data) => {
+        setResponse(data);
       })
       .finally(() => {
-        toast.dismiss(notification);
-        toast.success("Message sent successfully!");
+        //console.log(response?.status);
+
+        if (response?.status === "success") {
+          reset();
+          toast.dismiss(notification);
+          toast.success("Message sent successfully!");
+          setResponse({ status: "" });
+          return;
+        } else {
+          toast.dismiss(notification);
+          toast.error("Something went wrong. Please try again later.");
+          setResponse({ status: "" });
+          return;
+        }
       });
   };
 
