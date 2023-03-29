@@ -8,7 +8,7 @@ type Data = {
 
 mail.setApiKey(process.env.SENDGRID_API_KEY);
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
@@ -29,7 +29,13 @@ export default function handler(
     html: msg.replace(/\r\n/g, "<br>"),
   };
 
-  mail.send(data);
+  (async () => {
+    try {
+      await mail.send(data);
+    } catch (error) {
+      console.error(error);
+    }
+  })();
 
   res.status(200).json({ status: "OK" });
 }
