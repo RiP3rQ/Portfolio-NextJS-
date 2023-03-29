@@ -36,8 +36,6 @@ const Projects = ({ projects, polishLanguage }: Props) => {
 
   // POBIERANIE DANYCH PO ZMIANIE JĘZYKA
   const fetchData = async () => {
-    console.log(polishLanguage);
-
     if (polishLanguage) {
       const projects: Projects[] = await SanityClient.fetch(
         groq`*[_type == "projectsPL"] {

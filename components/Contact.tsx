@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { MapPinIcon, EnvelopeIcon } from "@heroicons/react/24/solid";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -19,10 +19,6 @@ type Inputs = {
   message: string;
 };
 
-type Response = {
-  status: string;
-};
-
 const schema = yup.object({
   name: yup.string().required("Name is required"),
   email: yup.string().email().required("Email is required"),
@@ -31,8 +27,6 @@ const schema = yup.object({
 });
 
 const Contact = ({ pageInfo, polishLanguage }: Props) => {
-  const [response, setResponse] = useState<Response>();
-
   const {
     register,
     handleSubmit,
@@ -41,7 +35,7 @@ const Contact = ({ pageInfo, polishLanguage }: Props) => {
   } = useForm<Inputs>({
     resolver: yupResolver(schema),
   });
-  const onSubmit: SubmitHandler<Inputs> = (formData) => {
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     if (errors.name || errors.email || errors.title || errors.message) {
       toast.error("Please fill all fields");
       return;
@@ -52,25 +46,21 @@ const Contact = ({ pageInfo, polishLanguage }: Props) => {
       method: "POST",
       body: JSON.stringify(formData),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        setResponse(data);
-      })
-      .finally(() => {
-        //console.log(response?.status);
-
-        if (response?.status === "success") {
-          reset();
-          toast.dismiss(notification);
-          toast.success("Message sent successfully!");
-          setResponse({ status: "" });
-          return;
-        } else {
+      .then((res) => {
+        if (!res.ok) {
           toast.dismiss(notification);
           toast.error("Something went wrong. Please try again later.");
-          setResponse({ status: "" });
           return;
         }
+        reset();
+        toast.dismiss(notification);
+        toast.success("Message sent successfully!");
+        return;
+      })
+      .catch((err) => {
+        toast.dismiss(notification);
+        toast.error("Something went wrong. Please try again later.");
+        return;
       });
   };
 
