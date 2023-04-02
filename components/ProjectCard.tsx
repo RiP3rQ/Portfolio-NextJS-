@@ -9,9 +9,10 @@ import {
 
 type Props = {
   project: Projects;
+  polishLanguage: boolean;
 };
 
-const ProjectCard = ({ project }: Props) => {
+const ProjectCard = ({ project, polishLanguage }: Props) => {
   return (
     <div className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center">
       <motion.img
@@ -31,7 +32,9 @@ const ProjectCard = ({ project }: Props) => {
         className="px-0 md:px-10 mt-0"
       >
         <h4 className="text-4xl font-bold">{project?.name}</h4>
-        <p className="font-light text-2xl mt-1">Technologies used:</p>
+        <p className="font-light text-2xl mt-1">
+          {polishLanguage ? "Użyte technologie:" : "Technologies used:"}
+        </p>
         <div className="flex space-x-2 my-2 items-center justify-center">
           {/* Tech used  */}
           {project?.technologies.map((tech, index) => (

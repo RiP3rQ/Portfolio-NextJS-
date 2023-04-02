@@ -107,7 +107,11 @@ const Projects = ({ projects, polishLanguage }: Props) => {
       scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80 text-center"
       >
         {sortedProjects?.map((project) => (
-          <ProjectCard key={project._id} project={project} />
+          <ProjectCard
+            key={project._id}
+            project={project}
+            polishLanguage={polishLanguage}
+          />
         ))}
       </div>
 
